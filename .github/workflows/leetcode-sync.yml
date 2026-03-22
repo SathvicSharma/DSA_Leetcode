@@ -24,3 +24,4 @@ jobs:
           destination-folder: ./submissions
           verbose: true
           commit-header: "🚀 Sync LeetCode submission:"
+
