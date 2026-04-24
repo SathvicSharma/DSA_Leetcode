@@ -1,35 +1,40 @@
 class Solution {
 public:
     bool isValid(string s) {
-        vector<char>brackets;
-        char ch;
-        int i=0,top=0;
-        while(i<s.size())
+        stack<int>st;
+        for(int i=0;i<s.size();i++)
         {
-            if(s[i]=='['||s[i]=='{'||s[i]=='(')
-            {
-                brackets.push_back(s[i]);
-                top++;
-            }
+            if(s[i]=='('||s[i]=='{'||s[i]=='[')
+                st.push(s[i]);
             else
             {
-                if(brackets.size()==0)
+                if(st.size()==0)
                     return false;
-                ch=brackets.back();
-                if((s[i]==')')&&(ch=='('))
-                    brackets.pop_back();
-                else if((s[i]==']')&&(ch=='['))
-                    brackets.pop_back();
-                else if((s[i]=='}')&&(ch=='{'))
-                    brackets.pop_back();
                 else
-                    return false;
+                {
+                    char ch=st.top();
+                    st.pop();
+                    if(s[i]==')')
+                    {
+                        if(ch!='(')
+                            return false;
+                    }
+                    if(s[i]==']')
+                    {
+                        if(ch!='[')
+                            return false;
+                    }
+                    if(s[i]=='}')
+                    {
+                        if(ch!='{')
+                            return false;
+                    }
+                }
             }
-            i++;
         }
-        if(brackets.size()==0)
-                return true;
+        if(st.size()==0)
+            return true;
         else
-                return false;
+            return false;
     }
 };
