@@ -19,6 +19,7 @@ public:
             else
             {
                 comp=(height[right]*(right-left));
+                area=max(area,comp);
                 if(comp>area)
                 {
                     area=comp;
